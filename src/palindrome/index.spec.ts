@@ -22,32 +22,16 @@ describe("palindrome", () => {
         expect(isPalindrome("Aa")).toBe(true);
     });
 
-    it('should ignore trailing space when checking for palindrome', () => {
-        expect(isPalindrome("a ")).toBe(true);
-    });
-
-    it('should ignore leading space when checking for palindrome', () => {
-        expect(isPalindrome(" a")).toBe(true);
-    });
-
-    it('should ignore space in between the phrase when checking for palindrome', () => {
-        expect(isPalindrome("ab a")).toBe(true);
-    });
-
-    it('should ignore multiple spaces in between the phrase when checking for palindrome', () => {
-        expect(isPalindrome("ab  cb a")).toBe(true);
-    });
-
-    it('should ignore tabs when checking for palindrome', () => {
-        expect(isPalindrome("ab  cb\ta")).toBe(true);
-    });
-
-    it('should ignore newlines when checking for palindrome', () => {
-        expect(isPalindrome("ab  cb\na")).toBe(true);
-    });
-
-    it('should ignore punctuation when checking for palindrome', () => {
-        expect(isPalindrome("ab?a")).toBe(true);
+    it.each([
+        "a ",
+        " a",
+        "ab a",
+        "ab  cb a",
+        "ab  cb\ta",
+        "ab  cb\na",
+        "ab?a"
+    ])('should ignore white spaces in between the phrase when checking for palindrome', (phrase) => {
+        expect(isPalindrome(phrase)).toBe(true);
     });
 
     it.each([
@@ -67,9 +51,8 @@ describe("palindrome", () => {
     it.each([
         ["🧟", true],
         ["🧟🎄", false]
-    ])('should return include and consider emojis when checking for palindrome', (phrase, expectedResult) => {
+    ])('should consider emojis when checking for palindrome', (phrase, expectedResult) => {
         expect(isPalindrome(phrase)).toBe(expectedResult);
     });
 
 });
- 
